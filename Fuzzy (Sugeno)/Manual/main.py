@@ -5,7 +5,8 @@ import pprint as pp
 from IPython.display import display
 import sklearn
 import matplotlib.pyplot as plt
-from MembershipFunc import MemberFunc
+# from Membership import MemberFunc
+import Membership
 
 class FuzzyLogic(object):
     """docstring for FuzzyLogic."""

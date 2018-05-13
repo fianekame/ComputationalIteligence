@@ -13,7 +13,7 @@ import math
 sinput = [[1, 1, 0, 0],[0, 0, 0, 1],[1, 0, 0, 0],[0, 0, 1, 1]]
 wvector = [[0.2, 0.6, 0.5, 0.9], [0.8, 0.4, 0.7, 0.3]]
 lr = 0.6
-jmlepoch = 100
+jmlepoch = 1
 """ Fungsi Pangkat 2 """
 def pangkatkan(list, power=1):
     return [number**power for number in list]
@@ -55,7 +55,7 @@ for epoch in range(1,jmlepoch+1):
 print(wvector)
 
 """ Testing Data """
-tesdata = [[1, 1, 0, 1],[1,0,0,1],[1, 1, 0, 0],[0, 1, 1, 1]]
+tesdata = [[0, 1, 0, 1],[0,0,0,1],[1, 1, 0, 0],[0, 1, 1, 1]]
 print("Data "+ str(tesdata))
 for i in range(0,len(tesdata)):
     datainput = tesdata[i]

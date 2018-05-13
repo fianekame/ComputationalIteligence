@@ -16,16 +16,8 @@ populasi = [[1, 0, 0, 1, 1],
             [0, 0, 1, 1, 1],
             [0, 1, 1, 0, 0],
             [0, 1, 1, 0, 1],
-            [1, 0, 0, 1, 0]
+            [1, 1, 0, 0, 0]
             ]
-
-list1 = [0,1,0,1,1,0]
-list2 = [1,1,1,0,0,1]
-newl1 = deepcopy(list1)
-newl2 = deepcopy(list2)
-i1,i2 = 1,2;
-cross = [newl1,newl2]
-
 
 def crossOver(cross,i1,i2):
     newdata = []
@@ -40,13 +32,15 @@ def crossOver(cross,i1,i2):
         newdata.append(xcross)
     return newdata
 
+
+fFitnes(populasi[5])
 """ Fungsi Fitness """
 def fFitnes(kromosom, maxt=50):
     hasilfitnes = 0
     for i in range(0, len(kromosom)):
         if kromosom[i]==1:
             hasilfitnes = hasilfitnes + beratbrg[i]
-    if hasilfitnes>=20:
+    if hasilfitnes>maxtotal:
         return 0
     return maxt - (maxtotal - hasilfitnes)
 
@@ -92,14 +86,11 @@ for gen in range(0, jumlahgen):
     pjgindividu = 5
     jmlindividu = 6
     indexcrossover = [random.choices(range(pjgindividu), k=2) for i in range(0, int(jmlindividu/2))]
-    indexcrossover
+    # indexcrossover = [[1, 3], [0, 0], [1, 2]] contoh index crossover miasl 6 maka diperlukan cuma 3 data indexcross
     indexcrossover = [sorted(i) for i in indexcrossover]
-    indexcrossover
     print("Index Crossover " + str(indexcrossover))
     populasicrosover = []
     indexcrosnya = 0
-    populasiseleksi
-    populasicrosover
     for i in range(0,jmlindividu,2):
         i1,i2 = indexcrossover[indexcrosnya][0],indexcrossover[indexcrosnya][1]
         newl1 = deepcopy(populasiseleksi[i])
@@ -108,24 +99,13 @@ for gen in range(0, jumlahgen):
         populasicrosover.append(hasilcross[0])
         populasicrosover.append(hasilcross[1])
         indexcrosnya = indexcrosnya + 1
-    # indexcrossover = [[1, 3], [0, 0], [1, 2], [0, 1]]
-    # for i in range(0, len(populasiseleksi)):
-    #     r = deepcopy(populasiseleksi[i])
-    #     ix, iy = indexcrossover[i][0], indexcrossover[i][1]
-    #     x, y = populasiseleksi[i][ix], populasiseleksi[i][iy]
-    #     r[ix] = y
-    #     r[iy] = x
-    #     populasicrosover.append(r)
     print("Populasi Crossover " + str(populasicrosover))
     """ Mutasi """
     indexmutasi = [random.choices(range(pjgindividu), k=2)
                    for i in range(0, jmlindividu)]
-    indexmutasi
     indexmutasi = [sorted(i) for i in indexmutasi]
-    # indexmutasi = [[0, 3], [1, 3], [2, 1], [3, 0]]
+    # indexmutasi = [[0, 3], [1, 3], [2, 1], [3, 0]] contoh mutas jika da 6 data berarti dibtuh 6 data index juga
     print("Index Mutasi " + str(indexmutasi))
-    populasicrosover
-    populasimutasi
     populasimutasi = []
     for i in range(0, len(populasicrosover)):
         indexnya = indexmutasi[i]

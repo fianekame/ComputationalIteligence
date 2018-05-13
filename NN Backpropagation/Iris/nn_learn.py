@@ -11,8 +11,9 @@ from sklearn.datasets import load_iris
 
 """ Load Digit Data """
 irisset = load_iris()
+y
 x, y = irisset.data, irisset.target
-
+x
 """ Split Data & Get 20 / Class """
 x1, x2, x3 = list(x[0:20]), list(x[50:70]), list(x[100:120])
 xtrain = x1 + x2 + x3
@@ -112,17 +113,17 @@ def bwHiddenInput(x, y, bobotw, datadeltaok, tempbobotv, lrate):
             bobotw[i][k] = deltaw
     return bobotw
 
-
 """ Init Epoch,Input,Output,Hiddden,LRate """
 jumlahepoch = 300
 inputlayer = len(xtrain[0])
+inputlayer
 hiddenlayer = 3
 outputlayer = 3
 lrate = 0.5
 
 """ Create Network 4+(1),3+(1),3 """
 network = init_network(inputlayer, hiddenlayer, outputlayer)
-
+pp.pprint(network)
 tempbobotw = deepcopy(network['bobot_w'])
 ydata = []
 odata = []

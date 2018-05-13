@@ -62,4 +62,4 @@ kadidat.input['relevancy'] = 4
 kadidat.input['interview'] = 4
 kadidat.compute()
 kadidat.output['candidate']
-# candidate.view(sim=kadidat)
+candidate.view(sim=kadidat)

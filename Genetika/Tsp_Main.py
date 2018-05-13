@@ -10,12 +10,11 @@ from copy import deepcopy
 import math
 
 kordinat = [[],[2, 2], [5, 2], [5, 6], [2, 6]]
-populasi = [[4, 1, 2, 3],
+populasi = [[2, 1, 3, 4],
+            [2, 1, 4, 3],
             [1, 4, 3, 2],
-            [4, 2, 1, 3],
-            [1, 2, 3, 4],
+            [4, 1, 2, 3],
             ]
-# list1, list2 = (list(x) for x in zip(*sorted(zip(l, populasi), key=lambda pair:pair[0], reverse=True )))
 
 """ Fungsi Fitness """
 def fFitnes(kromosom, max=50):
@@ -55,14 +54,15 @@ for gen in range(0,jumlahgen):
     jumlah = sum(hasilfitnes[0:len(hasilfitnes)])
     fitprob = [fitnes/jumlah for fitnes in hasilfitnes]
     hasilseleksi = [ambilParent(fitprob) for i in range(4)]
-    # hasilseleksi = [0,1,2,1]
+    hasilseleksi = [0,1,2,1]
+
     print("Hasil Seleksi "+ str(hasilseleksi))
     populasiseleksi = [populasi[i] for i in hasilseleksi]
     print("Hasil Rank "+ str(populasiseleksi))
     """ Crossover """
     pjgindividu = 4
     indexcrossover = [random.choices(range(pjgindividu), k=2) for i in range(0,pjgindividu)]
-    # indexcrossover = [[1, 3], [0, 0], [1, 2], [0, 1]]
+    indexcrossover = [[1, 3], [0, 0], [1, 2], [0, 1]]
     print("Index Crossover "+ str(indexcrossover))
     populasicrosover = []
     for i in range(0,len(populasiseleksi)):
@@ -75,7 +75,7 @@ for gen in range(0,jumlahgen):
     print("Populasi Crossover "+str(populasicrosover))
     """ Mutasi """
     indexmutasi = [random.choices(range(pjgindividu), k=2) for i in range(0,pjgindividu)]
-    # indexmutasi = [[0, 3], [1, 3], [2, 1], [3, 0]]
+    indexmutasi = [[0, 3], [1, 3], [2, 1], [3, 0]]
     print("Index Mutasi "+ str(indexmutasi))
     populasimutasi = []
     for i in range(0,len(populasicrosover)):
@@ -92,7 +92,7 @@ for gen in range(0,jumlahgen):
     terbaikmutasi = cariterbaik(hasilfitnesbaru,populasimutasi)
     print("Hasil Fitnes (Mutasi) "+ str(hasilfitnesbaru))
     print("Terbaik Mutasi "+ str(terbaikmutasi))
-    """ ELITIS """
+      """ ELITIS """
     populasi = terbaikawal + terbaikmutasi
     print("Populasi Baru "+ str(populasi))
     print("=================")

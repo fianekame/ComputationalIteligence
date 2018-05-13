@@ -14,7 +14,6 @@ c = [1,1,1]
 r = [0.1,0.2]
 v = [0.1,0.1,0.5,0.2,0.7]
 particle = [[-6],[4],[-2],[-1],[2]]
-n = 5
 
 epoch = 100
 
@@ -32,7 +31,6 @@ def findBest(particle):
         hasil.append(fungsiFitnes(part))
     idx = hasil.index(min(hasil))
     return particle[idx]
-
 
 for iterasi in range (0,epoch):
     print("Iterasi Ke "+ str(iterasi))

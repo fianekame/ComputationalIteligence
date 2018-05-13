@@ -29,13 +29,6 @@ to = [[0, 0.01, 0.01, 0.01, 0.01],
       [0.01, 0.01, 0.01, 0.01, 0]
       ]
 
-jarak = [[0, 0.25, 0.11, 0.09, 0.5],
-         [0.25, 0, 0.33, 0.1, 0.125],
-         [0.11, 0.33, 0, 0.2, 0.1],
-         [0.09, 0.1, 0.2, 0, 0.14],
-         [0.5, 0.125, 0.1, 0.14, 0]
-         ]
-
 """ Fungsi Pemotongan Desimal """
 def potongdesimalangka(angka):
     return float("{0:.3f}".format(angka))
@@ -80,9 +73,20 @@ def probKomulatif(kota,kotalewat,total):
             prob.append(0)
     return prob
 
+""" Menghitung Jarak """
+jarak = []
+for jr in jk:
+    jaraknya = []
+    for i in range(0,len(jr)):
+        if jr[i]!=0:
+            jaraknya.append(potongdesimalangka(1/jr[i]))
+        else:
+            jaraknya.append(0)
+    jarak.append(jaraknya)
+jarak
 kota = 0
-semut = 20
-iterasike = 100
+semut = 10
+iterasike = 200
 for x in range(0,iterasike):
     kombinasiant = []
     for j in range(0,semut):
@@ -91,7 +95,9 @@ for x in range(0,iterasike):
         while len(kotalewat)!=5:
             iterasi = len(kotalewat)
             total = hitungTotal(kota,kotalewat)
+            total
             prob = probKomulatif(kota,kotalewat,total)
+            prob
             kotalewat.append(kota)
             kota = ambilParent(prob)
             if len(kotalewat) == 3:
@@ -102,6 +108,7 @@ for x in range(0,iterasike):
         kota = kota + 1
         if kota == 5:
             kota = 0
+    kombinasiant
     """ Menghitung Delta """
     delta = []
     for ant in kombinasiant:
@@ -109,6 +116,7 @@ for x in range(0,iterasike):
         for i in range(0,len(ant)-1):
             hasildelta = hasildelta + jk[ant[i]][ant[i+1]]
         delta.append(potongdesimalangka(q/hasildelta))
+    delta
     """ Menghitung To Baru """
     for t in range(0,len(to)):
         tampung = to[t]
