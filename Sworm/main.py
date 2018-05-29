@@ -10,12 +10,12 @@ from copy import deepcopy
 import math
 
 """ Inisialisasi Awal """
-c = [1,1,1]
+c = [0.5,1,1]
 r = [0.1,0.2]
-v = [0.1,0.1,0.5,0.2,0.7]
-particle = [[-6],[4],[-2],[-1],[2]]
+v = [0.0,0.0,0.0,0.0]
+particle = [[-2],[-1],[4],[5]]
 
-epoch = 100
+epoch = 3
 
 def potongdesimalangka(angka):
     return float("{0:.3f}".format(angka))

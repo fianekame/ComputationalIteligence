@@ -100,7 +100,7 @@ for x in range(0,iterasike):
             prob
             kotalewat.append(kota)
             kota = ambilParent(prob)
-            if len(kotalewat) == 3:
+            if  len(kotalewat) == 3:
                 kotalewat.append(kota)
                 sisakota = [x for x in titik if x not in kotalewat]
                 kotalewat.append(sisakota[0])

@@ -15,23 +15,23 @@ candidate = ctrl.Consequent(np.arange(0, 11, 1), 'candidate')
 
 academic["high"] = fuzz.trapmf(academic.universe,[3, 3, 3.3, 3.5])
 academic["veryhigh"] = fuzz.trapmf(academic.universe,[3.3, 3.5, 4, 4])
-# academic.view()
+academic.view()
 
 relevancy["low"] = fuzz.trapmf(relevancy.universe,[0,0,3,5])
 relevancy["medium"] = fuzz.trimf(relevancy.universe,[2,5,8])
 relevancy["high"] = fuzz.trapmf(relevancy.universe,[5,7,10,10])
-# relevancy.view()
+relevancy.view()
 
 interview["low"] = fuzz.trapmf(interview.universe,[0,0,3,5])
 interview["medium"] = fuzz.trimf(interview.universe,[3,5,7])
 interview["high"] = fuzz.trapmf(interview.universe,[5,7,10,10])
-# interview.view()
+interview.view()
 
 candidate["least"] = fuzz.trapmf(candidate.universe,[0,0,2,4])
 candidate["less"] = fuzz.trimf(candidate.universe,[2,4,6])
 candidate["prefer"] = fuzz.trimf(candidate.universe,[4,6,8])
 candidate["most"] = fuzz.trapmf(candidate.universe,[6,8,10,10])
-# candidate.view()
+candidate.view()
 
 # A1
 rule1 = ctrl.Rule(academic['high'] & relevancy['low'] & interview['low'], candidate['least'])
@@ -57,9 +57,9 @@ rule18 = ctrl.Rule(academic['veryhigh'] & relevancy['high'] & interview['high'],
 candidate_ctrl = ctrl.ControlSystem([rule1, rule2, rule3 , rule4, rule5, rule6, rule7, rule8, rule9,rule10, rule11, rule12, rule13 , rule14, rule15, rule16, rule17, rule18])
 kadidat = ctrl.ControlSystemSimulation(candidate_ctrl)
 
-kadidat.input['academic'] = 3.6
-kadidat.input['relevancy'] = 4
-kadidat.input['interview'] = 4
+kadidat.input['academic'] = 3.51
+kadidat.input['relevancy'] = 8
+kadidat.input['interview'] = 9
 kadidat.compute()
 kadidat.output['candidate']
 candidate.view(sim=kadidat)

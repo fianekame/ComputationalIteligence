@@ -5,9 +5,9 @@ import pprint as pp
 from IPython.display import display
 import sklearn
 import matplotlib.pyplot as plt
-# from Membership import MemberFunc
-import Membership
+from MembershipFunc import MemberFunc
 
+# import Membership
 class FuzzyLogic(object):
     """docstring for FuzzyLogic."""
     def __init__(self, data2tes):
@@ -84,7 +84,9 @@ class FuzzyLogic(object):
 
     def doCompute(self):
         bawahPerRule = np.array(self.allrule)
+        # pp.pprint(bawahPerRule)
         agregasi = bawahPerRule.max(axis=0)
+        # pp.pprint(agregasi)
         defuz = 0
         atas = 0
         for i in range (0,11):
@@ -101,18 +103,20 @@ class FuzzyLogic(object):
         print("Academi:"+str(self.academy)+" | Relevancy:"+str(self.relevancy)+" | Interview:"+str(self.interview))
         print()
         print("=== Proses Mew Tiap Inputan ===")
+        # pp.pprint(self.allrule)
         pp.pprint(self.mew_akademik)
         pp.pprint(self.mew_relevansi)
         pp.pprint(self.mew_interview)
         print()
         print("=== Proses Perhitungan Rule Dan Penentuan Agregasi ===")
+        # pp.pprint(bawahPerRule)
+        # pp.pprint(agregasi)
         print() #ini belum tau apa yang mau ditampilakn disini
         print("=== Proses Hasil Akhir ===")
         pp.pprint(self.endResult)
         print()
 
-
-myFuzzy = FuzzyLogic([3.8,7,4])
+myFuzzy = FuzzyLogic([3.1,8,9])
 myFuzzy.addRule()
 myFuzzy.doCompute()
 myFuzzy.show()

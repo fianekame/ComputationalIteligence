@@ -8,10 +8,7 @@ Created on Sat Apr  7 19:32:10 2018
 
 #tabel AND
 AND = [
-        [1,0,0,0],
-        [1,0,1,0],
-        [1,1,0,0],
-        [1,1,1,1]
+        [1,1,1,1],[1,1,0,0],[1,0,1,0],[1,0,0,0]
     ]
 
 OR = [
@@ -61,5 +58,5 @@ def perceptron(epoch,x,w):
 epoch = 10
 weight = [0.3, 0.2, 0.4]
 print("bobot akhir tabel AND epoch ",epoch," :",perceptron(epoch,AND,weight))
-weight = [0.4, 0.1, 0.3]
+weight = [0.3, 0.2, 0.4]
 print("bobot akhir tabel OR epoch ",epoch," :",perceptron(epoch,OR,weight))

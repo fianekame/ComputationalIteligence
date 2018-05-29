@@ -1,3 +1,4 @@
+
 class MemberFunc(object):
     """docstring for MemberFunc."""
     def __init__(self):
@@ -38,4 +39,4 @@ class MemberFunc(object):
         elif x >= candidate[3]:
             return min(tomin,0)
         else:
-            return 0`
+            return 0

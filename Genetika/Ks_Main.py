@@ -9,14 +9,13 @@ import random
 from copy import deepcopy
 import math
 
-maxtotal = 20
-beratbrg = [12, 8, 10, 3, 4]
-populasi = [[1, 0, 0, 1, 1],
-            [1, 0, 0, 1, 0],
-            [0, 0, 1, 1, 1],
-            [0, 1, 1, 0, 0],
-            [0, 1, 1, 0, 1],
-            [1, 1, 0, 0, 0]
+maxtotal = 25
+beratbrg = [3,5,9,4,7,8]
+valu = [15,25,30,20,5,10]
+populasi = [[1, 0, 1, 0, 1, 0],
+            [1, 1, 0, 0, 1, 0],
+            [0, 0, 1, 1, 0, 1],
+            [0, 1, 1, 1, 0, 0]
             ]
 
 def crossOver(cross,i1,i2):
@@ -32,17 +31,31 @@ def crossOver(cross,i1,i2):
         newdata.append(xcross)
     return newdata
 
+def mutasi(populasi,indexnya):
+    pophasil = []
+    r = deepcopy(populasi)
+    for idx in range(indexnya[0],indexnya[1]+1):
+        if r[idx]==1:
+            r[idx]=0
+        else:
+            r[idx]=1
+    return r
 
-fFitnes(populasi[5])
+mutasi([0,1,1,1,0],[0,1])
+
 """ Fungsi Fitness """
 def fFitnes(kromosom, maxt=50):
     hasilfitnes = 0
+    berat = 0
+    tpoin = 0
     for i in range(0, len(kromosom)):
         if kromosom[i]==1:
-            hasilfitnes = hasilfitnes + beratbrg[i]
-    if hasilfitnes>maxtotal:
-        return 0
-    return maxt - (maxtotal - hasilfitnes)
+            berat = berat + beratbrg[i]
+            tpoin = tpoin + valu[i]
+    if berat>maxtotal:
+        berat = 0
+    finalberat = 50 - (maxtotal - berat)
+    return finalberat + tpoin
 
 # fFitnes(populasi[4])
 
@@ -65,7 +78,7 @@ def cariterbaik(fitnes, populasi, jml=3):
 
 
 print("Populasi Awal " + str(populasi))
-jumlahgen = 5
+jumlahgen = 1
 for gen in range(0, jumlahgen):
     print("Generasi Ke - " + str(gen))
     """ Hitung Fitnes Tiap Populasi"""
@@ -77,13 +90,12 @@ for gen in range(0, jumlahgen):
     jumlah = sum(hasilfitnes[0:len(hasilfitnes)])
     fitprob = [fitnes / jumlah for fitnes in hasilfitnes]
     hasilseleksi = [ambilParent(fitprob) for i in range(6)]
-
     # hasilseleksi = [0,1,2,1]
     print("Hasil Seleksi " + str(hasilseleksi))
     populasiseleksi = [populasi[i] for i in hasilseleksi]
     print("Hasil Rank " + str(populasiseleksi))
     """ Crossover """
-    pjgindividu = 5
+    pjgindividu = 10
     jmlindividu = 6
     indexcrossover = [random.choices(range(pjgindividu), k=2) for i in range(0, int(jmlindividu/2))]
     # indexcrossover = [[1, 3], [0, 0], [1, 2]] contoh index crossover miasl 6 maka diperlukan cuma 3 data indexcross
@@ -96,6 +108,7 @@ for gen in range(0, jumlahgen):
         newl1 = deepcopy(populasiseleksi[i])
         newl2 = deepcopy(populasiseleksi[i+1])
         hasilcross = crossOver([newl1,newl2],i1,i2)
+        hasilcross
         populasicrosover.append(hasilcross[0])
         populasicrosover.append(hasilcross[1])
         indexcrosnya = indexcrosnya + 1
@@ -109,13 +122,14 @@ for gen in range(0, jumlahgen):
     populasimutasi = []
     for i in range(0, len(populasicrosover)):
         indexnya = indexmutasi[i]
-        r = deepcopy(populasicrosover[i])
-        for idx in range(indexnya[0],indexnya[1]+1):
-            if r[idx]==1:
-                r[idx]=0
-            else:
-                r[idx]=1
-        populasimutasi.append(r)
+        hasilmut = mutasi(populasicrosover[i],indexnya)
+        # r = deepcopy(populasicrosover[i])
+        # for idx in range(indexnya[0],indexnya[1]+1):
+        #     if r[idx]==1:
+        #         r[idx]=0
+        #     else:
+        #         r[idx]=1
+        populasimutasi.append(hasilmut)
     print("Populasi Mutasi " + str(populasimutasi))
     # print(populasimutasi)
     """ Hitung Fitnes Tiap Populasi Yang Sudah Dimutasi"""
