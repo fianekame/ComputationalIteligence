@@ -11,7 +11,7 @@ from copy import deepcopy
 
 """ Maze Generator Using Binary Tree"""
 class MazeMaker:
-
+    """ Constructor | Size Parameter """
     def __init__(self, size):
         self.size = size
         self.maps = [0] * (size*2+1)
@@ -21,6 +21,7 @@ class MazeMaker:
         self.finish = [self.lastroad+1,(size*2)//2]
         self.generateMaze()
 
+    """ Generate Random Maze Using BinaryTree Method"""
     def generateMaze(self):
         for i in range(len(self.maps)):
             self.maps[i] = [0] * (self.size*2+1)
@@ -44,11 +45,14 @@ class MazeMaker:
         self.maps[1][1] = 2
         self.maps[self.lastroad+1][(self.size*2)//2] = 3
 
+    """ Retrun Result For Maze """
     def getMap(self):
         return self.maps
 
+    """ Return Start Position For Maze """
     def getStartPosition(self):
         return self.start
 
+    """ Return Finish Position For Maze """
     def getFinishPosition(self):
         return self.finish
