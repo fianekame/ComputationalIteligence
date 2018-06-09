@@ -7,6 +7,8 @@ from copy import deepcopy
 
 """ The Pretty Print For Maze """
 class MazePrinter:
+
+    """ Change List To String / Beatifull Concept """
     def toStringMaps(self,maps):
         hasil = ""
         for listin in maps:
@@ -20,10 +22,12 @@ class MazePrinter:
                     hasil =  hasil + str("\n")
         return hasil
 
+    """ To Print Maze Without Animation """
     def simplePrint(self, maps, judul):
         print("\n\t"+judul)
         print("\n"+self.toStringMaps(maps))
 
+    """ Print Maze With Animation """
     def animPrint(self, maps, jalur, judul):
         print("\n\t"+judul)
         roadmap = deepcopy(maps)
@@ -58,6 +62,7 @@ class MazePrinter:
                 sys.stdout.write("\033[F"*(len(roadmap)+1))
             time.sleep(0.2)
             sys.stdout.flush()
+            """ To Pritnt Player Movement Uncomment It """
             # if len(laststop)!=0 and i!=len(jalur)-1:
             #     roadmap[laststop[0]][laststop[1]] = 0
         print("\tTransversal Selesai\n")
