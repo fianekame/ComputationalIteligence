@@ -53,7 +53,6 @@ def perceptron(epoch,x,w):
             w = cek_bobot(y,x[t],w)
             #print('w',t+1,' ',w)
     return w
-(1*-2.7) + (1*2.2) + (1*1.4)
 # epoch = (int(input("Masukkan Jumlah epoch : ")))
 epoch = 10
 weight = [0.3, 0.2, 0.4]

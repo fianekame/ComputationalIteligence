@@ -38,3 +38,4 @@ for ephoc in range(0,ephoclen):
         print("Hasil Netinput: "+str(netinput))
         print("Hasil Y: "+str(restes))
         changeWeight(w0,w1,w2,restes,value)
+#fix some issue
