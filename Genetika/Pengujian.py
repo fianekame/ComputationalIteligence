@@ -26,13 +26,12 @@ populasi = [[0, 1, 1, 1, 1, 0],
 # fFitnes(populasi[2])
 # fFitnes(populasi[3])
 nilaifitnes = [130, 85, 106, 0]
-class TesTerbaik(unittest.TestCase):
-    def test_1terbaik(self):
-        expected = [[0, 1, 1, 1, 1, 0]]
-        self.assertEqual(cariterbaik(nilaifitnes, populasi,1), expected)
-    def test_2terbaik(self):
-        expected = [[0, 1, 1, 1, 1, 0], [0, 0, 1, 1, 0, 1]]
-        self.assertEqual(cariterbaik(nilaifitnes, populasi,2), expected)
+class FitnessTest(unittest.TestCase):
+    def test_fitnes1(self):
+        self.assertEqual(fFitnes(populasi[0]),120)
+    # def test_2terbaik(self):
+    #     expected = [[0, 1, 1, 1, 1, 0], [0, 0, 1, 1, 0, 1]]
+    #     self.assertEqual(cariterbaik(nilaifitnes, populasi,2), expected)
 
 # indexcros = [[1, 3], [0, 2], [1, 2]]
 def crossOver(cross,i1,i2):
@@ -84,9 +83,9 @@ def cariterbaik(fitnes, populasi, jml=2):
         *sorted(zip(fitnes, populasi), key=lambda pair: pair[0], reverse=True)))
     return list2[:jml]
 
-fitnesterbaik = [fFitnes(kromosom) for kromosom in populasi]
-fitnesterbaik
-cariterbaik(fitnesterbaik, populasi,2)
+# fitnesterbaik = [fFitnes(kromosom) for kromosom in populasi]
+# fitnesterbaik
+# cariterbaik(fitnesterbaik, populasi,2)
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TesTerbaikc)
+    suite = unittest.TestLoader().loadTestsFromTestCase(FitnessTest)
     unittest.TextTestRunner(verbosity=2).run(suite)
