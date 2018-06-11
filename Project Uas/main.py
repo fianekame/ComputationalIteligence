@@ -70,7 +70,7 @@ populasi = [[randint(0,3) for i in range(0,jmlGen)]
 """ Proses Re-Generasi """
 loading = [".","..","..."]
 lastgen = 0
-# print("\tProses Training",jmlGenerasi,"Generasi")
+print("\tProses Training",jmlGenerasi,"Generasi")
 print()
 for generasi in range(0,jmlGenerasi):
     """ Animasi Training  """
@@ -127,7 +127,7 @@ print()
 
 fitnesterbaik = [fitnesFunc(kromosom) for kromosom in populasi]
 terbaik = getBestKromosom(fitnesterbaik,populasi,1)
-# print("Hasil Fitness " + str(fitnesterbaik))
+print("Hasil Fitness " + str(fitnesterbaik))
 jalur = " ".join(str(x) for x in terbaik[0])
 print("Tranversal : ",jalur)
 mazePrinter.animPrint(maps,terbaik[0],"Tranversal Proses")
