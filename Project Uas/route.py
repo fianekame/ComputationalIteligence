@@ -66,6 +66,7 @@ def fFitnes(kromosom, maxs=100):
 """ Pilih Random Untuk Routhele Wheel """
 def ambilParent(fitprob):
     pick = random.uniform(0, 1)
+    # print("random number ",pick)
     current = 0
     for i in range (0,len(fitprob)):
         nilai = fitprob[i];
@@ -78,24 +79,33 @@ def cariterbaik(fitnes,populasi,jml=3):
     list1, list2 = (list(x) for x in zip(*sorted(zip(fitnes, populasi), key=lambda pair:pair[0], reverse=True )))
     return list2[:jml]
 
+def potongdesimalangka(angka):
+    return float("{0:.2f}".format(angka))
 # pp.pprint("Populasi Awal "+ str(populasi))
-jumlahgen = 500
+jumlahgen = 1
 for gen in range(0,jumlahgen):
     # print("Generasi Ke - "+ str(gen))
     """ Hitung Fitnes Tiap Populasi"""
-    hasilfitnes = [fFitnes(kromosom) for kromosom in populasi]
+    hasilfitnes = [potongdesimalangka(fFitnes(kromosom)) for kromosom in populasi]
     # print("Hasil Fitnes "+ str(hasilfitnes))
     terbaikawal = cariterbaik(hasilfitnes,populasi)
     # print("Terbaik Awal "+ str(terbaikawal))
     """ Roulette Wheels Selection // Seleksi Proses"""
     jumlah = sum(hasilfitnes[0:len(hasilfitnes)])
-    fitprob = [fitnes/jumlah for fitnes in hasilfitnes]
+    # print("Jumlah "+ str(potongdesimalangka(jumlah)))
+    fitprob = [potongdesimalangka(fitnes/jumlah) for fitnes in hasilfitnes]
+    # print("Probabilitas "+ str(fitprob))
+    current = 0
+    # for i in range(0,len(fitprob)):
+    #     print("data ke ",i, "prob = ",current, " sampai ", current+fitprob[i])
+    #     current = current+fitprob[i]
+
     hasilseleksi = [ambilParent(fitprob) for i in range(6)]
     hasilseleksi
     # hasilseleksi = [0,1,2,1]
     # print("Hasil Seleksi "+ str(hasilseleksi))
     populasiseleksi = [populasi[i] for i in hasilseleksi]
-    # print("Hasil Rank "+ str(populasiseleksi))
+    print("Hasil Rank "+ str(populasiseleksi[0]))
     """ Crossover """
     jumlahgen = 20
     jumlahkromosom = 6
@@ -110,7 +120,7 @@ for gen in range(0,jumlahgen):
         r[ix] = y
         r[iy] = x
         populasicrosover.append(r)
-    # print("Populasi Crossover "+str(populasicrosover))
+    # print("Populasi Crossover "+str(populasicrosover[0]))
     """ Mutasi """
     indexmutasi = [random.choices(range(jumlahgen), k=2) for i in range(0,jumlahkromosom)]
     # indexmutasi = [[0, 3], [1, 3], [2, 1], [3, 0]]
@@ -128,40 +138,44 @@ for gen in range(0,jumlahgen):
     """ Hitung Fitnes Tiap Populasi Yang Sudah Dimutasi"""
     hasilfitnesbaru = [fFitnes(kromosom) for kromosom in populasimutasi]
     terbaikmutasi = cariterbaik(hasilfitnesbaru,populasimutasi)
-    # print("Hasil Fitnes (Mutasi) "+ str(hasilfitnesbaru))
-    # print("Terbaik Mutasi "+ str(terbaikmutasi))
+    print("Hasil Fitnes (Mutasi) "+ str(hasilfitnesbaru))
+    print("Terbaik Mutasi "+ str(terbaikmutasi))
     """ ELITIS """
     populasi = terbaikawal + terbaikmutasi
     # print("Populasi Baru "+ str(populasi))
     # print("=================")
 
-fitnesterbaik = [fFitnes(kromosom) for kromosom in populasi]
-terbaik = cariterbaik(fitnesterbaik,populasi,1)
-print("Hasil Fitness " + str(fitnesterbaik))
-print("Hasil Akhir " + str(terbaik))
-print("=================")
-showMaps(maps)
-roadmap = deepcopy(maps)
-print("=================")
-cpx = 1
-cpy = 1
-for gen in terbaik[0]:
-    if gen==0:
-        if maps[cpy-1][cpx]!=1:
-            roadmap[cpy-1][cpx] = 4
-            cpy = cpy - 1
-    if gen==1:
-        if maps[cpy][cpx+1]!=1:
-            roadmap[cpy][cpx+1] = 4
-            cpx = cpx + 1
-    if gen==2:
-        if maps[cpy][cpx-1]!=1:
-            roadmap[cpy][cpx-1] = 4
-            cpx = cpx - 1
-    if gen==3:
-        if maps[cpy+1][cpx]!=1:
-            roadmap[cpy+1][cpx] = 4
-            cpy = cpy + 1
+j = [4, 5, 6, 7, 1, 3, 7, 5]
+if sum(i > 5 for i in j) > 0:
+    print("heheh")
 
-print(cpy,cpx)
-showMaps(roadmap)
+# fitnesterbaik = [fFitnes(kromosom) for kromosom in populasi]
+# terbaik = cariterbaik(fitnesterbaik,populasi,1)
+# print("Hasil Fitness " + str(fitnesterbaik))
+# print("Hasil Akhir " + str(terbaik))
+# print("=================")
+# showMaps(maps)
+# roadmap = deepcopy(maps)
+# print("=================")
+# cpx = 1
+# cpy = 1
+# for gen in terbaik[0]:
+#     if gen==0:
+#         if maps[cpy-1][cpx]!=1:
+#             roadmap[cpy-1][cpx] = 4
+#             cpy = cpy - 1
+#     if gen==1:
+#         if maps[cpy][cpx+1]!=1:
+#             roadmap[cpy][cpx+1] = 4
+#             cpx = cpx + 1
+#     if gen==2:
+#         if maps[cpy][cpx-1]!=1:
+#             roadmap[cpy][cpx-1] = 4
+#             cpx = cpx - 1
+#     if gen==3:
+#         if maps[cpy+1][cpx]!=1:
+#             roadmap[cpy+1][cpx] = 4
+#             cpy = cpy + 1
+#
+# print(cpy,cpx)
+# showMaps(roadmap)
