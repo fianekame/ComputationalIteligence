@@ -48,7 +48,6 @@ def getBestKromosom(fitnes,populasi,jml=5):
     list1, list2 = (list(x) for x in zip(*sorted(zip(fitnes, populasi), key=lambda pair:pair[0], reverse=True )))
     return list2[:jml]
 
-
 """ Menggenerate Maze Secara Dinamis"""
 """ 5 Adalah Parameter Besar Maze"""
 myMaze = MazeMaker(5)
@@ -56,17 +55,19 @@ mazePrinter = MazePrinter()
 maps = myMaze.getMap()
 finish = myMaze.getFinishPosition()
 mazePrinter.simplePrint(maps,"Maze Awal")
-
+print(maps)
+maps = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 2, 1, 0, 0, 0, 1, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1], [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1], [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1], [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1]]
 """ Inisialisasi Awal """
-jmlGen = 50
+jmlGen = 30
 jmlKromosom = 10
-jmlGenerasi = 300
+jmlGenerasi = 400
 
 """ Pembuatan Populasi """
 """ 0,3 = 0 Sampai 3 0 Atas 1 Kanan 2 Kiri 3 Bawah """
 populasi = [[randint(0,3) for i in range(0,jmlGen)]
             for i in range(0,jmlKromosom)]
 
+print("Populasi Awal ", populasi)
 """ Proses Re-Generasi """
 loading = [".","..","..."]
 lastgen = 0
@@ -82,7 +83,7 @@ for generasi in range(0,jmlGenerasi):
     """ Hitung Fitnes Tiap Populasi """
     hasilfitnes = [fitnesFunc(kromosom) for kromosom in populasi]
     """ Menyimpan Kromosom Terbaik Di Awal """
-    terbaikawal = getBestKromosom(hasilfitnes,populasi)
+    terbaikawal = getBestKromosom(hasilfitnes,populasi,jmlKromosom//2)
 
     """ Roulette Wheels Selection Seleksi """
     jumlah = sum(hasilfitnes[0:len(hasilfitnes)])
@@ -114,12 +115,12 @@ for generasi in range(0,jmlGenerasi):
 
     """ Hitung Fitnes Tiap Kromosom Yang Sudah Dimutasi"""
     hasilfitnesbaru = [fitnesFunc(kromosom) for kromosom in populasimutasi]
-    terbaikmutasi = getBestKromosom(hasilfitnesbaru,populasimutasi)
+    terbaikmutasi = getBestKromosom(hasilfitnesbaru,populasimutasi,jmlKromosom//2)
 
     """ Proses Elitis """
     populasi = terbaikawal + terbaikmutasi
     fitnesterbaik = [fitnesFunc(kromosom) for kromosom in populasi]
-    if sum(i >= 98.0 for i in fitnesterbaik) > 0:
+    if sum(i >= 99.0 for i in fitnesterbaik) > 0:
         break
 print()
 print("\r Training Selesai Di Generasi-"+str(lastgen))
@@ -128,6 +129,7 @@ print()
 fitnesterbaik = [fitnesFunc(kromosom) for kromosom in populasi]
 terbaik = getBestKromosom(fitnesterbaik,populasi,1)
 print("Hasil Fitness " + str(fitnesterbaik))
+print("Hasil Terbaik " + str(terbaik))
 jalur = " ".join(str(x) for x in terbaik[0])
 print("Tranversal : ",jalur)
 mazePrinter.animPrint(maps,terbaik[0],"Tranversal Proses")
